@@ -66,8 +66,7 @@ export default function StoreSwitcher({
         className)}>
           <StoreIcon className="h-5 w-5 opacity-70 group-hover:opacity-100
           transition" />
-          <div className="text-black opacity-80 group-hover:opacity-100
-          transition">
+          <div className="opacity-80 group-hover:opacity-100 transition">
             {currentStore?.label}
           </div>
           <ChevronsUpDown className="h-4 w-4 ml-auto shrink-0 opacity-70
