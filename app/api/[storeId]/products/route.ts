@@ -13,6 +13,7 @@ export async function POST(
     const body = await req.json();
     const {
       name,
+      description,
       price,
       images,
       categoryId,
@@ -28,6 +29,10 @@ export async function POST(
 
     if (!name) {
       return new NextResponse('Name Required', { status: 400 });
+    }
+
+    if (!description) {
+      return new NextResponse('Description Required', { status: 400 });
     }
     
     if (!price) {
@@ -68,6 +73,7 @@ export async function POST(
     const product = await prismadb.product.create({
       data: {
         name,
+        description,
         price,
         categoryId,
         sizeId,

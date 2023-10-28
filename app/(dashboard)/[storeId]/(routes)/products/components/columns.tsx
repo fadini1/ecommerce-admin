@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table"
 
 export type ProductColumn = {
   id: string;
+  description: string;
   name: string;
   price: string;
   size: string;
@@ -21,6 +22,10 @@ export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "name",
     header: "Name",
+  },
+  {
+    accessorKey: "description",
+    header: "Description",
   },
   {
     accessorKey: "isArchived",

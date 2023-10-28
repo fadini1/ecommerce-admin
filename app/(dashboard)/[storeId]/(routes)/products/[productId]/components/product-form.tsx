@@ -1,7 +1,7 @@
 'use client';
  
 import { useState } from "react";
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { toast } from "react-hot-toast";
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -55,6 +55,7 @@ interface ProductFormProps {
 
 const formSchema = z.object({
   name: z.string().min(1),
+  description: z.string().min(1),
   categoryId: z.string().min(1),
   sizeId: z.string().min(1),
   colorId: z.string().min(1),
@@ -83,7 +84,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
   const title = initialData ? 'Edit Product' : 'Create Product';
 
-  const description = initialData
+  const descriptionOfProductPage = initialData
   ? 'Manage your Product Settings'
   : 'Add a new Product to your Store'
 
@@ -98,6 +99,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       price: parseFloat(String(initialData?.price))
     } : {
       name: '',
+      description: '',
       categoryId: '',
       colorId: '',
       sizeId: '',
@@ -164,7 +166,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       <div className="flex items-center justify-between">
         <Heading 
           title={title}
-          description={description}
+          description={descriptionOfProductPage}
         />
         {initialData && (
           <Button 
@@ -218,6 +220,26 @@ const ProductForm: React.FC<ProductFormProps> = ({
                     <Input 
                       disabled={loading}
                       placeholder="What is the Name of the Product?"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField 
+              name='description'
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">
+                    Description
+                  </FormLabel>
+                  <FormControl>
+                    <Input 
+                      disabled={loading}
+                      placeholder="What is this Product like?"
                       {...field}
                     />
                   </FormControl>

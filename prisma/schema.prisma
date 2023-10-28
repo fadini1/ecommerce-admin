@@ -109,6 +109,7 @@ model Product {
   price       Decimal
 
   name        String
+  description String
   storeId     String
   categoryId  String
   sizeId      String 
