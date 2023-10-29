@@ -64,6 +64,7 @@ const formSchema = z.object({
   isArchived: z.boolean().default(false).optional(),
 
   price: z.coerce.number().min(1),
+  availableQty: z.coerce.number().min(1),
 
   images: z.object({ url: z.string() }).array()
 });
@@ -96,7 +97,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
     resolver: zodResolver(formSchema),
     defaultValues: initialData ? {
       ...initialData,
-      price: parseFloat(String(initialData?.price))
+      price: parseFloat(String(initialData?.price)),
+      availableQty: parseFloat(String(initialData?.availableQty))
     } : {
       name: '',
       description: '',
@@ -104,6 +106,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       colorId: '',
       sizeId: '',
       price: 0,
+      availableQty: 0,
       images: [],
       isFeatured: false,
       isArchived: false
@@ -240,6 +243,27 @@ const ProductForm: React.FC<ProductFormProps> = ({
                     <Input 
                       disabled={loading}
                       placeholder="What is this Product like?"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField 
+              name='availableQty'
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">
+                    Available Quantity
+                  </FormLabel>
+                  <FormControl>
+                    <Input 
+                      disabled={loading}
+                      type="number"
+                      placeholder="How many copies are in Stock?"
                       {...field}
                     />
                   </FormControl>
