@@ -107,7 +107,6 @@ model Image {
 
 model Product {
   price        Decimal
-  availableQty Decimal
 
   name         String
   description  String
@@ -122,6 +121,8 @@ model Product {
 
   isFeatured   Boolean     @default(false)
   isArchived   Boolean     @default(false)
+
+  quantity     Int         @default(1)
   
   images       Image[]
   orderItems   OrderItem[]
@@ -159,6 +160,8 @@ model OrderItem {
   orderId      String    
   productId    String  
   id           String      @id @default(uuid())
+
+  orderQty     Int
 
   order        Order       @relation(fields: [orderId], references: [id])
   product      Product     @relation(fields: [productId], references: [id])
