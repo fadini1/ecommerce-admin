@@ -31,9 +31,9 @@ const ProductsPage = async ({ params }: { params: { storeId: string }}) => {
     color: item.color.value,
     isFeatured: item.isFeatured,
     isArchived: item.isArchived,
+    quantity: item.quantity,
     createdAt: format(item.createdAt, 'MMMM do, yyyy'),
-    price: formatter.format(item.price.toNumber()),
-    availableQty: formatter.format(item.availableQty.toNumber())
+    price: formatter.format(item.price.toNumber())
   }));
 
   return (
